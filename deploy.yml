@@ -1,0 +1,15 @@
+---
+- name: Deploy LAMP Stack
+  hosts: Slave
+  become: yes
+
+  tasks:
+    - name: Transfer the bash script to the Slave node
+      copy:
+        src: /vagrant/lamp.sh  # Assuming the script is in the same directory as the Vagrantfile
+        dest: /home/vagrant/lamp.sh
+        mode: +x  # Ensure the script is executable
+
+    - name: Run the bash script on the Slave node
+      shell: /home/vagrant/lamp.sh
+
